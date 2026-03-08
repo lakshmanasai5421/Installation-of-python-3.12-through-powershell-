@@ -44,7 +44,7 @@ You should see a terminal window open.
 In PowerShell, run the following command:
 
 ```
-Invoke-WebRequest https://repo.anaconda.com/archive/Anaconda3-latest-Windows-x86_64.exe -OutFile Anaconda.exe
+Invoke-WebRequest https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Windows-x86_64.exe -OutFile "$env:USERPROFILE\Downloads\Anaconda.exe"
 ```
 
 What this command does:

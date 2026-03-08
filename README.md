@@ -104,12 +104,12 @@ This means Anaconda is installed correctly.
 
 # Step 5: Create a Python 3.12 Environment
 
-Now we will create a new environment with Python 3.12.
+Now we will create a new environment with Python 3.12.0
 
 Run the following command:
 
 ```
-conda create -n py312 python=3.12
+conda create -n py312 python=3.12.0
 ```
 
 Explanation:

@@ -1,31 +1,31 @@
-# Installing Anaconda and Creating a Python 3.12 Environment (Windows – PowerShell Guide)
+# Installing Python 3.12.3 and Creating a Virtual Environment (Windows – PowerShell Guide)
 
-This guide explains how to install **Anaconda** on a Windows system using **PowerShell** and then create a **Python 3.12 environment**. It is written in a beginner-friendly way so you can follow along even if you have never installed Python before.
+This guide explains how to install **Python 3.12.3 from python.org** on a Windows system using **PowerShell**, and then create a **virtual environment** for your projects.
 
 ---
 
-## Overview
+# Overview
 
-Anaconda is a popular Python distribution used for data science, machine learning, and general Python development. It includes the **conda** package manager, which allows you to create isolated environments with different Python versions.
+Python.org provides the official Python distribution. Instead of conda environments, Python includes a built‑in tool called **venv** that lets you create isolated environments for different projects.
 
 In this guide you will:
 
-1. Download the Anaconda installer using PowerShell
-2. Install Anaconda on your system
-3. Verify that Anaconda works
-4. Create a Python 3.12 environment
+1. Download the Python installer using PowerShell
+2. Install Python on your system
+3. Verify that Python works
+4. Create a Python virtual environment
 5. Activate and test the environment
 
 ---
 
-## Prerequisites
+# Prerequisites
 
 Before starting, make sure:
 
-* You are using **Windows**
-* You have **PowerShell** available
-* You have an **internet connection**
-* You have permission to install software on your computer
+* You are using Windows
+* PowerShell is available
+* You have an internet connection
+* You have permission to install software
 
 ---
 
@@ -35,181 +35,184 @@ Before starting, make sure:
 2. Type **PowerShell**
 3. Click **Windows PowerShell**
 
-You should see a terminal window open.
+A terminal window will open.
 
 ---
 
-# Step 2: Download the Anaconda Installer
+# Step 2: Download the Python 3.12.3 Installer
 
-In PowerShell, run the following command:
+Run the following command in PowerShell:
 
+```powershell
+Invoke-WebRequest https://www.python.org/ftp/python/3.12.3/python-3.12.3-amd64.exe -OutFile "$env:USERPROFILE\Downloads\python3123.exe"
 ```
-Invoke-WebRequest https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Windows-x86_64.exe -OutFile "$env:USERPROFILE\Downloads\Anaconda.exe"
-```
 
-What this command does:
-
-* Downloads the latest **Anaconda installer**
-* Saves it as **Anaconda.exe** in your current folder
-
-The download may take a few minutes because the installer is large (around 600MB–1GB).
+This command downloads the Python 3.12.3 installer and saves it in your **Downloads** folder.
 
 ---
 
 # Step 3: Run the Installer
 
-After the download finishes, run:
+Navigate to the Downloads folder and run the installer:
 
+```powershell
+cd $env:USERPROFILE\Downloads
+.\python3123.exe
 ```
-.\Anaconda.exe
-```
 
-This will launch the installer.
+The Python installation window will open.
 
-Follow the installer steps:
+Important:
 
-1. Click **Next**
-2. Click **I Agree**
-3. Choose **Just Me (Recommended)**
-4. Select the installation location (default is fine)
-5. Click **Install**
+Make sure you enable:
 
-Installation may take a few minutes.
+**Add Python to PATH**
+
+Then follow these steps:
+
+1. Click **Install Now**
+2. Wait for installation to complete
+3. Click **Close**
 
 ---
 
 # Step 4: Verify the Installation
 
-After installation completes:
+Close PowerShell and open a new PowerShell window.
 
-1. Open the **Start Menu**
-2. Search for **Anaconda Prompt**
-3. Open it
+Run:
 
-Now type:
-
-```
-conda --version
-```
-
-If everything worked correctly, you should see something like:
-
-```
-conda 23.x.x
-```
-
-This means Anaconda is installed correctly.
-
----
-
-# Step 5: Create a Python 3.12 Environment
-
-Now we will create a new environment with Python 3.12.0
-
-Run the following command:
-
-```
-conda create -n py312 python=3.12.0
-```
-
-Explanation:
-
-* **conda create** → creates a new environment
-* **-n py312** → names the environment "py312"
-* **python=3.12** → installs Python version 3.12
-
-You will see a list of packages that will be installed.
-
-Type:
-
-```
-y
-```
-
-and press **Enter**.
-
----
-
-# Step 6: Activate the Environment
-
-Once installation finishes, activate the environment:
-
-```
-conda activate py312
-```
-
-If successful, your terminal will change to something like:
-
-```
-(py312) C:\Users\YourName>
-```
-
-This means the environment is active.
-
----
-
-# Step 7: Check the Python Version
-
-Now verify the Python version:
-
-```
+```powershell
 python --version
 ```
 
 Expected output:
 
 ```
-Python 3.12.x
+Python 3.12.3
 ```
 
-This confirms that Python 3.12 is running inside your environment.
+Also check pip:
+
+```powershell
+pip --version
+```
 
 ---
 
-# Step 8: Deactivate the Environment (Optional)
+# Step 5: Create a Virtual Environment
 
-If you want to leave the environment, run:
+Create a new environment for your project:
 
+```powershell
+python -m venv py312
 ```
-conda deactivate
-```
 
-This returns you to the base environment.
+Explanation:
+
+* `python -m venv` creates a virtual environment
+* `py312` is the environment folder name
 
 ---
 
-# Why Use Anaconda Environments?
+# Step 6: Activate the Environment
 
-Using environments has several advantages:
+Activate the environment using:
 
-* Different projects can use different Python versions
-* Package conflicts are avoided
-* Your system Python installation remains unchanged
-* Easy to manage dependencies
+```powershell
+.\py312\Scripts\Activate
+```
 
+If successful, your terminal will look like this:
+
+```
+(py312) PS C:\Users\YourName>
+```
+
+---
+
+# Step 7: Upgrade pip
+
+It is recommended to upgrade pip after creating the environment:
+
+```powershell
+python -m pip install --upgrade pip
+```
+
+---
+
+# Step 8: Install Packages
+
+You can now install packages inside the environment.
+
+Example:
+
+```powershell
+pip install flask pandas numpy scikit-learn
+```
+
+These packages will only exist inside this virtual environment.
+
+---
+
+# Step 9: Verify Python Version Inside Environment
+
+Run:
+
+```powershell
+python --version
+```
+
+Output:
+
+```
+Python 3.12.3
+```
+
+---
+
+# Step 10: Deactivate the Environment
+
+When you finish working, deactivate the environment:
+
+```powershell
+deactivate
+```
+
+---
+
+# Why Virtual Environments Are Important
+
+Virtual environments allow you to:
+
+* Use different package versions for different projects
+* Avoid dependency conflicts
+* Keep your main Python installation clean
+* Reproduce project environments easily
 
 ---
 
 # Troubleshooting
 
-## Command not found: conda
+## Python Not Recognized
 
-If you see:
+If you see an error that python is not recognized:
 
-```
-conda : The term 'conda' is not recognized
-```
-
-Try:
-
-* Restarting your computer
-* Opening **Anaconda Prompt** instead of PowerShell
+* Reinstall Python
+* Ensure **Add Python to PATH** was checked
+* Restart PowerShell
 
 ---
 
-## Slow Download
+## Execution Policy Error When Activating
 
-The Anaconda installer is large. If the download is slow, consider installing **Miniconda** instead, which is a smaller version of Anaconda.
+If activation fails due to security policy, run:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then activate the environment again.
 
 ---
 
@@ -217,11 +220,9 @@ The Anaconda installer is large. If the download is slow, consider installing **
 
 You have successfully:
 
-* Downloaded Anaconda using PowerShell
-* Installed Anaconda on Windows
-* Created a Python 3.12 environment
-* Activated and verified the installation
+* Downloaded Python 3.12.3 from python.org
+* Installed Python on Windows
+* Created a virtual environment
+* Activated and tested the environment
 
-You are now ready to start developing Python applications using Anaconda.
-
----
+You are now ready to build Python applications using isolated environments.
